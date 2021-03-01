@@ -22,7 +22,7 @@ public class PracticeFormPage {
     String phoneNumber = faker.phoneNumber().subscriberNumber(10);
     String monthOfBirth = getRandomMonth();
     String yearOfBirth = getRandomYear();
-    int dayOfBirth = getRandomInt(1,29);
+    int dayOfBirth = getRandomInt(10,29);
     String subject = "Chemistry";
     String currentAddress = faker.address().fullAddress();
     String state = "Haryana";
