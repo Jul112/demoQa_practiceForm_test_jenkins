@@ -19,7 +19,7 @@ public class PracticeFormPage {
     String email = getRandomEmail();
     String gender = getRandomGender();
     String hobby = getRandomHobby();
-    String phoneNumber = getRandomPhoneTenDigits();
+    String phoneNumber = faker.phoneNumber().subscriberNumber(10);
     String monthOfBirth = getRandomMonth();
     String yearOfBirth = getRandomYear();
     int dayOfBirth = getRandomInt(1,29);

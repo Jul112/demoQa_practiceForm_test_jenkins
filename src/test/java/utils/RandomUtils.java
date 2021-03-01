@@ -4,6 +4,8 @@ import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Timestamp;
 import java.time.Month;
+import java.time.format.TextStyle;
+import java.util.Locale;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -36,7 +38,7 @@ public class RandomUtils {
         StringBuilder message = new StringBuilder();
         int messageLength = getRandomInt(min, max);
         while (message.length() < messageLength) {
-            int wordIndex = getRandomInt(0, words.length -1);
+            int wordIndex = getRandomInt(0, words.length - 1);
             message.append(words[wordIndex] + " ");
         }
 
@@ -67,7 +69,7 @@ public class RandomUtils {
     }
 
     public static String getDifficultRandomPhone(String code) {
-        return code + " (" +getRandomLong(111L, 999L) + ") " + getRandomLong(11111L, 999999L) + "-" + getRandomLong(111L, 999999L);
+        return code + " (" + getRandomLong(111L, 999L) + ") " + getRandomLong(11111L, 999999L) + "-" + getRandomLong(111L, 999999L);
     }
 
     public static Long getRandomLong(Long min, Long max) {  // метод формирует рандомное число long
@@ -81,25 +83,25 @@ public class RandomUtils {
 
     public static String getRandomGender() {
         String[] gender = {"Female", "Male", "Other"};
-        int genderIndex = getRandomInt(0,2);
+        int genderIndex = getRandomInt(0, 2);
         return gender[genderIndex];
     }
 
     public static String getRandomHobby() {
         String[] hobbies = {"Sports", "Reading", "Music"};
-        int hobbyIndex = getRandomInt(0,2);
+        int hobbyIndex = getRandomInt(0, 2);
         return hobbies[hobbyIndex];
     }
 
     public static String getRandomMonth() {
-        int monthIndex = getRandomInt(1,12);
-        String month = Month.of(monthIndex).name();
+        int monthIndex = getRandomInt(1, 12);
+        String month = Month.of(monthIndex).getDisplayName(TextStyle.FULL, Locale.forLanguageTag("en"));
         return month;
     }
 
     public static String getRandomYear() {
         Random rand = new Random();
-        return String.valueOf(1900+rand.nextInt(2020 - 1900 + 1));
+        return String.valueOf(1900 + rand.nextInt(2020 - 1900 + 1));
     }
 
 }
