@@ -2,6 +2,7 @@ package tests;
 
 import com.codeborne.selenide.Configuration;
 import io.qameta.allure.selenide.AllureSelenide;
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -10,6 +11,7 @@ import java.net.URI;
 import java.util.Map;
 
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
+import static helpers.AttachmentsHelper.*;
 
 public class TestBase {
     @BeforeAll
@@ -17,7 +19,7 @@ public class TestBase {
         addListener("AllureSelenide", new AllureSelenide());
         Configuration.startMaximized = true;
 
-        DesiredCapabilities capabilities = new DesiredCapabilities();
+        DesiredCapabilities capabilities = new DesiredCapabilities(); //собираем объект свойств
                 /*config for Java + Selenium
         capabilities.setCapability("browserName", "chrome");
         capabilities.setCapability("browserVersion", "88.0");
@@ -31,9 +33,17 @@ public class TestBase {
         );*/
 
        //config for Java + Selenide
-        capabilities.setCapability("enableVNC", true);
+        capabilities.setCapability("enableVNC", true); //добавляем свойство браузеру
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;
         Configuration.remote = "https://user1:1234@selenoid.autotests.cloud:4444/wd/hub/";
+    }
+
+    @AfterEach
+    public void afterEach() {
+        attachScreenshot("Last Screenshot");
+        attachPageSource();
+        attachAsText("Browser console logs", getConsoleLogs());
+        attachVideo();
     }
 }
