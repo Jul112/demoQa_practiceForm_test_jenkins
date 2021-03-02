@@ -5,10 +5,6 @@ import io.qameta.allure.selenide.AllureSelenide;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import org.openqa.selenium.remote.RemoteWebDriver;
-
-import java.net.URI;
-import java.util.Map;
 
 import static com.codeborne.selenide.WebDriverRunner.closeWebDriver;
 import static com.codeborne.selenide.logevents.SelenideLogger.addListener;
@@ -18,6 +14,7 @@ public class TestBase {
     @BeforeAll
     static void setup() {
         addListener("AllureSelenide", new AllureSelenide());
+        Configuration.browser = System.getProperty("browser", "chrome");
         Configuration.startMaximized = true;
 
         DesiredCapabilities capabilities = new DesiredCapabilities(); //собираем объект свойств
@@ -33,7 +30,7 @@ public class TestBase {
                 capabilities
         );*/
 
-       //config for Java + Selenide
+        //config for Java + Selenide
         capabilities.setCapability("enableVNC", true); //добавляем свойство браузеру
         capabilities.setCapability("enableVideo", true);
         Configuration.browserCapabilities = capabilities;

@@ -58,9 +58,9 @@ public class PracticeFormPage {
     @Step("Set date of birth")
         public void setBirthDate(String year, String month, int day){
         $("#dateOfBirthInput").click();
-        $(".react-datepicker__month-select").selectOption(monthOfBirth);
-        $(".react-datepicker__year-select").selectOption(yearOfBirth);
-        $(".react-datepicker__day--0" + dayOfBirth).click();
+        $(".react-datepicker__month-select").selectOption(month);
+        $(".react-datepicker__year-select").selectOption(year);
+        $(".react-datepicker__day--0" + day).click();
     }
 
     @Step("Check successful form submit")
